@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selvadentro Tulum — Residential Lots in the Jungle | Tierra de Cenotes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Lexend:wght@300;400;500;600&display=swap">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --dark: #1F2A22;
+    --dark2: #232F26;
+    --med: #2D3B2A;
+    --olive: #465241;
+    --khaki: #65713F;
+    --cream: #ECE5D8;
+    --cream2: #F7F3EC;
+    --cream3: #F8F5EF;
+    --copper: #cf8543;
+    --copper2: #B5853F;
+    --text-dark: #232F26;
+    --text-mid: #465241;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Lexend', sans-serif; background: var(--cream2); color: var(--text-dark); overflow-x: hidden; }
+  h1, h2, h3, h4 { font-family: 'Cardo', serif; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream2);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px max(20px, 4vw);
+    border-bottom: 1px solid rgba(35,47,38,0.1);
+  }
+  nav .logo img { height: 42px; }
+  nav .nav-links { display: flex; align-items: center; gap: 28px; }
+  nav .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; letter-spacing: 0.02em; }
+  nav .nav-links a:hover { color: var(--dark); }
+  nav .nav-right { display: flex; align-items: center; gap: 16px; }
+  nav .btn-nav {
+    background: var(--olive); color: #fff;
+    border: none; border-radius: 100px;
+    padding: 10px 22px; font-family: 'Lexend', sans-serif; font-size: 14px; font-weight: 500;
+    cursor: pointer; white-space: nowrap;
+  }
+  nav .btn-nav:hover { background: var(--dark); }
+  .lang-toggle { display: flex; gap: 6px; }
+  .lang-toggle span { font-size: 13px; font-weight: 400; color: var(--text-mid); cursor: pointer; }
+  .lang-toggle span.active { font-weight: 600; color: var(--dark); }
+  @media(max-width:680px) { nav .nav-links { display: none; } }
+
+  /* HERO */
+  .hero {
+    background: var(--dark);
+    padding: 72px max(20px, 5vw) 80px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  @media(max-width:900px) { .hero { grid-template-columns: 1fr; gap: 40px; padding: 48px 20px 56px; } }
+  .hero-content { }
+  .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--copper); text-transform: uppercase; margin-bottom: 20px; }
+  .hero h1 { font-family: 'Cardo', serif; font-size: clamp(32px, 4vw, 48px); line-height: 1.18; color: #fff; margin-bottom: 10px; }
+  .hero .price { font-family: 'Cardo', serif; font-size: clamp(38px, 5.5vw, 60px); font-weight: 700; color: var(--copper); line-height: 1.1; margin-bottom: 6px; }
+  .hero .price-sub { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 24px; font-weight: 300; }
+  .hero .hero-sub { font-size: 14px; color: rgba(255,255,255,0.65); margin-bottom: 32px; line-height: 1.6; max-width: 480px; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; }
+  .btn-primary {
+    background: var(--olive); color: #fff; border: none; border-radius: 100px;
+    padding: 14px 28px; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #3a4435; }
+  .btn-outline {
+    background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.4); border-radius: 100px;
+    padding: 14px 28px; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 400;
+    cursor: pointer; text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.8); }
+  .hero-fine { font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  /* VIDEO */
+  .hero-video { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; cursor: pointer; }
+  .hero-video .thumbnail { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-video .play-btn {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 68px; height: 68px; border-radius: 50%;
+    background: var(--copper); border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .hero-video .play-btn:hover { transform: translate(-50%,-50%) scale(1.08); background: #e09550; }
+  .hero-video .play-btn svg { margin-left: 4px; }
+  .wistia-container {
+    position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden;
+    display: none; background: #000;
+  }
+  .wistia-container.active { display: block; }
+
+  /* SECTION SHARED */
+  section { padding: 80px max(20px, 5vw); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; color: var(--copper2); text-transform: uppercase; margin-bottom: 14px; }
+  .section-title { font-family: 'Cardo', serif; font-size: clamp(28px, 3.5vw, 42px); color: var(--dark); margin-bottom: 20px; line-height: 1.25; }
+  .section-body { font-size: 16px; line-height: 1.75; color: var(--text-mid); max-width: 580px; margin-bottom: 28px; }
+
+  /* MASTER PLAN */
+  .masterplan { background: var(--cream3); }
+  .masterplan-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  @media(max-width:800px) { .masterplan-inner { grid-template-columns: 1fr; } }
+  .masterplan-img { border-radius: 16px; overflow: hidden; }
+  .masterplan-img img { width: 100%; display: block; }
+  .checklist { list-style: none; margin-bottom: 32px; }
+  .checklist li { display: flex; gap: 12px; margin-bottom: 14px; font-size: 15px; color: var(--text-mid); line-height: 1.5; }
+  .checklist li::before { content: ""; flex-shrink: 0; width: 20px; height: 20px; background: var(--copper); border-radius: 50%; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10l4 4 6-7' stroke='white' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-size: cover; margin-top: 2px; }
+
+  /* COMPARISON */
+  .comparison { background: var(--cream2); }
+  .comparison-inner { max-width: 900px; margin: 0 auto; }
+  .comparison .section-title { text-align: center; }
+  .comp-table { width: 100%; border-collapse: collapse; margin: 36px 0 32px; font-size: 15px; }
+  .comp-table th { padding: 14px 20px; font-family: 'Lexend', sans-serif; font-weight: 600; font-size: 13px; color: var(--text-mid); border-bottom: 2px solid var(--olive); }
+  .comp-table th:first-child { text-align: left; }
+  .comp-table th:not(:first-child) { text-align: center; width: 120px; }
+  .comp-table td { padding: 13px 20px; border-bottom: 1px solid rgba(35,47,38,0.1); font-size: 14px; color: var(--text-dark); }
+  .comp-table td:not(:first-child) { text-align: center; }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .check { color: var(--copper); font-size: 20px; }
+  .cross { color: rgba(35,47,38,0.3); font-size: 18px; }
+
+  .infra-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; margin: 32px 0 36px; }
+  .infra-item { background: white; border-radius: 12px; padding: 18px 14px; text-align: center; font-size: 12px; font-weight: 500; color: var(--text-mid); letter-spacing: 0.02em; line-height: 1.4; }
+  .infra-item .icon { font-size: 22px; margin-bottom: 8px; }
+
+  /* AMENITIES */
+  .amenities { background: var(--cream3); }
+  .amenities .section-title { margin-bottom: 32px; }
+  .amenities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .amenity-item { background: white; border-radius: 12px; padding: 20px 14px; text-align: center; font-size: 12px; font-weight: 500; color: var(--text-mid); line-height: 1.5; }
+  .amenity-item .icon { font-size: 24px; margin-bottom: 10px; }
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 36px; }
+  @media(max-width:600px) { .photo-grid { grid-template-columns: repeat(2, 1fr); } }
+  .photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 10px; display: block; }
+
+  /* CTA */
+  .cta-section { background: var(--cream2); text-align: center; }
+  .cta-section .section-title { margin-bottom: 12px; }
+  .cta-section .section-body { margin: 0 auto 40px; text-align: center; }
+  .cta-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 960px; margin: 0 auto 40px; }
+  @media(max-width:720px) { .cta-cards { grid-template-columns: 1fr; } }
+  .cta-card { background: var(--cream3); border-radius: 16px; padding: 28px 24px; text-align: left; }
+  .cta-card h3 { font-family: 'Cardo', serif; font-size: 20px; color: var(--dark); margin-bottom: 14px; line-height: 1.3; }
+  .cta-card a { font-size: 14px; font-weight: 500; color: var(--copper); text-decoration: none; cursor: pointer; }
+  .cta-card a:hover { color: var(--copper2); }
+
+  /* PARTNERS */
+  .partners { background: var(--cream2); border-top: 1px solid rgba(35,47,38,0.1); padding: 60px max(20px, 5vw); text-align: center; }
+  .partners-logos { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; margin-bottom: 36px; }
+  .partners-logos img { height: 44px; object-fit: contain; filter: grayscale(0.3); opacity: 0.8; }
+
+  /* FOOTER */
+  footer { background: var(--dark2); color: rgba(255,255,255,0.65); padding: 48px max(20px, 5vw) 32px; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; flex-wrap: wrap; margin-bottom: 36px; }
+  .footer-logo img { height: 40px; opacity: 0.9; }
+  .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+  .footer-links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 13px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-fine { font-size: 11px; line-height: 1.7; color: rgba(255,255,255,0.4); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    z-index: 1000; overflow-y: auto; padding: 24px 16px;
+  }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    background: var(--cream3); border-radius: 20px; width: 100%; max-width: 540px;
+    padding: 40px 36px; position: relative; margin: auto;
+  }
+  @media(max-width:580px) { .modal { padding: 28px 20px; } }
+  .modal-close {
+    position: absolute; top: 16px; right: 20px; background: none; border: none;
+    font-size: 24px; cursor: pointer; color: var(--text-mid); line-height: 1;
+  }
+  .modal h2 { font-family: 'Cardo', serif; font-size: 26px; color: var(--dark); margin-bottom: 8px; }
+  .modal p { font-size: 14px; color: var(--text-mid); margin-bottom: 24px; line-height: 1.6; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  @media(max-width:460px) { .form-row { grid-template-columns: 1fr; } }
+  .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-field label { font-size: 12px; font-weight: 500; color: var(--text-mid); letter-spacing: 0.04em; text-transform: uppercase; }
+  .form-field input, .form-field select {
+    border: 1.5px solid rgba(35,47,38,0.2); border-radius: 10px;
+    padding: 12px 14px; font-family: 'Lexend', sans-serif; font-size: 14px; color: var(--text-dark);
+    background: white; outline: none;
+  }
+  .form-field input:focus, .form-field select:focus { border-color: var(--olive); }
+  .form-row .form-field { margin-bottom: 0; }
+  .btn-submit {
+    width: 100%; background: var(--olive); color: #fff; border: none; border-radius: 100px;
+    padding: 15px 24px; font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 500;
+    cursor: pointer; margin-top: 8px;
+  }
+  .btn-submit:hover { background: var(--dark); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+  .form-success { text-align: center; display: none; padding: 20px 0; }
+  .form-success h3 { font-family: 'Cardo', serif; font-size: 24px; color: var(--dark); margin-bottom: 10px; }
+  .form-success p { font-size: 14px; color: var(--text-mid); }
+  .form-privacy { font-size: 11px; color: rgba(70,82,65,0.6); text-align: center; margin-top: 12px; }
+
+  /* Shared CTA section btn alignment */
+  .section-cta { text-align: center; }
+  .btn-primary.centered { display: inline-block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <img src="https://lotes.selvadentrotulum.com/logo-selvandentro_tulum.webp" alt="Selvadentro Tulum">
+  </div>
+  <div class="nav-links">
+    <a href="#masterplan">Master Plan</a>
+    <a href="#comparison">Advantages</a>
+    <a href="#amenities">Amenities</a>
+  </div>
+  <div class="nav-right">
+    <button class="btn-nav" onclick="openModal()">Get information</button>
+    <div class="lang-toggle">
+      <span class="active">EN</span>
+      <span>ES</span>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Tierra de Cenotes</p>
+    <h1>Cenote-Lifestyle Lots in Tulum starting from</h1>
+    <div class="price">$106,681 CAD*</div>
+    <p class="price-sub">with financing up to 48 months</p>
+    <p class="hero-sub">Privada Suspiro at Selvadentro — availability, pricing, and payment plan sent instantly.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="openModal()">Get information</button>
+      <a href="#masterplan" class="btn-outline">See Master plan</a>
+    </div>
+    <p class="hero-fine">*Starting price subject to availability. Taxes/closing costs not included.</p>
+  </div>
+  <div>
+    <div class="hero-video" id="videoWrap" onclick="startVideo()">
+      <img class="thumbnail" src="https://lotes.selvadentrotulum.com/9-selvadentro_tulum.webp" alt="Selvadentro Tulum video preview">
+      <button class="play-btn" aria-label="Play video">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="7,4 19,11 7,18" fill="white"/>
+        </svg>
+      </button>
+    </div>
+    <div class="wistia-container" id="wistiaContainer"></div>
+  </div>
+</section>
+
+<!-- MASTER PLAN -->
+<section class="masterplan" id="masterplan">
+  <div class="masterplan-inner">
+    <div>
+      <p class="section-label">Master Plan</p>
+      <h2 class="section-title">Why invest in Selvadentro?</h2>
+      <p class="section-body">A cenote-centered master plan designed for low-density jungle living. Selvadentro integrates nature preservation, distinctive amenities, and a clear vision for sustainable growth in Tulum.</p>
+      <ul class="checklist">
+        <li>9 cenotes distributed throughout the community</li>
+        <li>Cenote Club House: Located at the center of 3 cenotes, featuring lounge areas, restaurant, cocktail bar, pool, cenote beach club, and more.</li>
+        <li>Tree House Club: Elevated social club with restaurant, sunset bar, café, jungle views, and access to 5 cenotes.</li>
+        <li>Selvadentro Nature Avenue: A natural corridor with a central-park atmosphere and a unique experiential pathway.</li>
+      </ul>
+      <button class="btn-primary" onclick="openModal()">Get information</button>
+    </div>
+    <div class="masterplan-img">
+      <img src="https://lotes.selvadentrotulum.com/9-selvadentro_tulum.webp" alt="Selvadentro Tulum Master Plan">
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="comparison" id="comparison">
+  <div class="comparison-inner">
+    <h2 class="section-title">Your Best Option</h2>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Selvadentro</th>
+            <th>Typical Projects</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Low-density lots with private jungle (≈65% conservation)</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Cenote-centered master plan (9 internal cenotes)</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Distinctive lifestyle + wellness experience</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Financing up to 48 months, interest-free</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>24/7 security and controlled access</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Design and infrastructure planned by AMA and Maat Handasa</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+          <tr>
+            <td>Title Guarantee</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="infra-grid">
+      <div class="infra-item"><div class="icon">🛡️</div>24/7 Security</div>
+      <div class="infra-item"><div class="icon">🚧</div>Controlled access</div>
+      <div class="infra-item"><div class="icon">🏛️</div>Main entrance</div>
+      <div class="infra-item"><div class="icon">🛣️</div>Internal roads</div>
+      <div class="infra-item"><div class="icon">💧</div>Water network</div>
+      <div class="infra-item"><div class="icon">📡</div>Internet and connectivity</div>
+      <div class="infra-item"><div class="icon">🌿</div>Signature Landscaping</div>
+      <div class="infra-item"><div class="icon">⚡</div>Sustainable energy (planned)</div>
+    </div>
+    <div class="section-cta">
+      <button class="btn-primary centered" onclick="openModal()">Get information</button>
+    </div>
+  </div>
+</section>
+
+<!-- AMENITIES -->
+<section class="amenities" id="amenities">
+  <p class="section-label">Amenities</p>
+  <h2 class="section-title">Amenities that increase the value of your investment</h2>
+  <div class="amenities-grid">
+    <div class="amenity-item"><div class="icon">🛝</div>Kids Parks</div>
+    <div class="amenity-item"><div class="icon">🐾</div>Pet Parks</div>
+    <div class="amenity-item"><div class="icon">🌿</div>Nature Trails</div>
+    <div class="amenity-item"><div class="icon">🧘</div>Wellness Center</div>
+    <div class="amenity-item"><div class="icon">🗼</div>Sightseeing Tower</div>
+    <div class="amenity-item"><div class="icon">🔥</div>Fire Pit Lounges</div>
+    <div class="amenity-item"><div class="icon">💪</div>Jungle & Indoor Gyms</div>
+    <div class="amenity-item"><div class="icon">🌳</div>Tree House Social Club</div>
+    <div class="amenity-item"><div class="icon">🏓</div>Padel & Pickleball Courts</div>
+    <div class="amenity-item"><div class="icon">🏊</div>Cenote Club House</div>
+  </div>
+  <div class="photo-grid">
+    <img src="https://lotes.selvadentrotulum.com/2-selvandentro_tulum.webp" alt="Selvadentro">
+    <img src="https://lotes.selvadentrotulum.com/4-selvandentro_tulum.webp" alt="Selvadentro">
+    <img src="https://lotes.selvadentrotulum.com/5-selvandentro_tulum.webp" alt="Selvadentro">
+    <img src="https://lotes.selvadentrotulum.com/7-selvandentro_tulum.webp" alt="Selvadentro">
+    <img src="https://lotes.selvadentrotulum.com/8-selvandentro_tulum.webp" alt="Selvadentro">
+    <img src="https://lotes.selvadentrotulum.com/01-selvandentro_tulum.webp" alt="Selvadentro">
+  </div>
+  <div class="section-cta">
+    <button class="btn-primary centered" onclick="openModal()">Get information</button>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <h2 class="section-title">You're one step away from your own piece of jungle</h2>
+  <p class="section-body">Complete the form to receive availability, pricing, payment plan details, and what's included in the development.</p>
+  <div class="cta-cards">
+    <div class="cta-card">
+      <h3>Build a sanctuary home</h3>
+      <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">Design a residence that embraces jungle living, with cenotes at the center of your lifestyle.</p>
+      <a onclick="openModal()">Get information →</a>
+    </div>
+    <div class="cta-card">
+      <h3>Create an experience-focused eco-stay</h3>
+      <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">Transform your lot into a nature-immersed retreat for travelers seeking authentic experiences in Tulum.</p>
+      <a onclick="openModal()">Get information →</a>
+    </div>
+    <div class="cta-card">
+      <h3>Secure a lot in Tulum's cenote corridor</h3>
+      <p style="font-size:14px;color:var(--text-mid);margin-bottom:16px;line-height:1.6;">Surrounded by protected jungle and cenotes, and designed for enduring value and future freedom.</p>
+      <a onclick="openModal()">Get information →</a>
+    </div>
+  </div>
+  <button class="btn-primary" onclick="openModal()">Get information</button>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners">
+  <div class="partners-logos">
+    <img src="https://lotes.selvadentrotulum.com/development_company_logo-jjf_creando.webp" alt="JJF Creando">
+    <img src="https://lotes.selvadentrotulum.com/logo-v.png" alt="Estudio AMA">
+    <img src="https://lotes.selvadentrotulum.com/maat.png" alt="Maat Handasa">
+  </div>
+  <button class="btn-primary" onclick="openModal()">Get information</button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://lotes.selvadentrotulum.com/selvadentro__20.png" alt="Selvadentro">
+    </div>
+    <div class="footer-links">
+      <a href="#masterplan">Master Plan</a>
+      <a href="#comparison">Advantages</a>
+      <a href="#amenities">Amenities</a>
+      <a onclick="openModal()" style="cursor:pointer;">Get information</a>
+    </div>
+  </div>
+  <div class="footer-fine">
+    <span>All information, pricing, and availability are subject to change without prior notice. This does not constitute an offer to sell or a solicitation to buy where prohibited by law.</span>
+    <span>All rights reserved &nbsp;|&nbsp; Privacy Policy &nbsp;|&nbsp; Terms &amp; Conditions &nbsp;|&nbsp; Built by To The Max Media</span>
+  </div>
+</footer>
+
+<!-- MODAL FORM -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="formContent">
+      <h2>Get information</h2>
+      <p>Receive availability, pricing, and payment plan details for Selvadentro in Canadian dollars.</p>
+      <form id="leadForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-field">
+            <label>First Name *</label>
+            <input type="text" name="firstname" required placeholder="First name">
+          </div>
+          <div class="form-field">
+            <label>Last Name *</label>
+            <input type="text" name="lastname" required placeholder="Last name">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Phone *</label>
+          <input type="tel" name="phone" required placeholder="+1 (555) 000-0000">
+        </div>
+        <div class="form-field">
+          <label>Email *</label>
+          <input type="email" name="email" required placeholder="your@email.com">
+        </div>
+        <div class="form-field">
+          <label>Budget Range</label>
+          <select name="budget_range">
+            <option value="">Select your budget</option>
+            <option value="Under $100K CAD">Under $100K CAD</option>
+            <option value="$100K–$150K CAD">$100K–$150K CAD</option>
+            <option value="$150K–$250K CAD">$150K–$250K CAD</option>
+            <option value="$250K+ CAD">$250K+ CAD</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Timeline</label>
+          <select name="timeline">
+            <option value="">When are you looking to invest?</option>
+            <option value="Immediately">Immediately</option>
+            <option value="1-3 months">1–3 months</option>
+            <option value="3-6 months">3–6 months</option>
+            <option value="6-12 months">6–12 months</option>
+            <option value="Just exploring">Just exploring</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">Send my information</button>
+        <p class="form-privacy">We respect your privacy. No spam, ever.</p>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h3>Thank you!</h3>
+      <p>We've received your information and will be in touch shortly with availability, pricing, and payment plan details.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function startVideo() {
+  document.getElementById('videoWrap').style.display = 'none';
+  var c = document.getElementById('wistiaContainer');
+  c.classList.add('active');
+  c.innerHTML = '<iframe src="https://fast.wistia.net/embed/iframe/jn8el9or7a?autoPlay=1&videoFoam=true" title="Selvadentro Tulum" allowtransparency="true" frameborder="0" scrolling="no" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen style="width:100%;height:100%;position:absolute;top:0;left:0;border-radius:16px;"></iframe>';
+}
+
+async function submitForm(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending...';
+
+  var form = e.target;
+  var data = {
+    firstname: form.firstname.value,
+    lastname: form.lastname.value,
+    phone: form.phone.value,
+    email: form.email.value,
+    budget_range: form.budget_range.value,
+    timeline: form.timeline.value,
+    language: 'EN',
+    currency: 'CAD',
+    source: 'CAD Home Page',
+    landing_page: window.location.href,
+    referrer: document.referrer || ''
+  };
+
+  try {
+    await fetch('https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/6e1b31c7-4794-4642-95e6-29cbbd754081', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch(err) {}
+
+  document.getElementById('formContent').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
+</body>
+</html>
